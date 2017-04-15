@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "shiftinggears",
+  "name": "Shifting Gears",
+  "description": "",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["ExpensiveKoala", "MechWarrior99", "shadowfacts", "werty1124"],
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
