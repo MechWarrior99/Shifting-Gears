@@ -17,37 +17,36 @@ import shiftinggears.material.EnumMaterial;
 /**
  * @author shadowfacts
  */
-public class BlockOre extends Block {
+public class BlockBlock extends Block {
 
-	public BlockOre() {
-		super(Material.ROCK);
-		setRegistryName("ore");
-		setUnlocalizedName(ShiftingGears.ID + ".ore");
+	public BlockBlock() {
+		super(Material.IRON);
+		setRegistryName("block");
+		setUnlocalizedName(ShiftingGears.ID + ".block");
 
-		setDefaultState(getDefaultState().withProperty(SGProperties.ORE_MATERIAL, EnumMaterial.COPPER));
+		setDefaultState(getDefaultState().withProperty(SGProperties.MATERIAL, EnumMaterial.BRASS));
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, SGProperties.ORE_MATERIAL);
+		return new BlockStateContainer(this, SGProperties.MATERIAL);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(SGProperties.ORE_MATERIAL).ordinal();
+		return state.getValue(SGProperties.MATERIAL).ordinal();
 	}
 
 	@Override
 	@Deprecated
 	public IBlockState getStateFromMeta(int meta) {
-		return EnumMaterial.values()[meta].getOreState();
+		return EnumMaterial.values()[meta].getBlockState();
 	}
 
 	@Override
-	@SuppressWarnings("deprecated")
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		ItemStack stack = placer.getHeldItem(hand);
-		return EnumMaterial.values()[stack.getMetadata()].getOreState();
+		return EnumMaterial.values()[stack.getMetadata()].getBlockState();
 	}
 
 }

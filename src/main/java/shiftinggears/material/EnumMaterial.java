@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import shiftinggears.ShiftingGears;
 import shiftinggears.block.SGBlocks;
-import shiftinggears.block.material.BlockOre;
+import shiftinggears.block.SGProperties;
 import shiftinggears.item.SGItems;
 
 /**
@@ -55,19 +55,32 @@ public enum EnumMaterial implements IStringSerializable {
 	}
 
 	public IBlockState getOreState() {
-		return SGBlocks.ore.getDefaultState().withProperty(BlockOre.MATERIAL, this);
+		return SGBlocks.ore.getDefaultState().withProperty(SGProperties.ORE_MATERIAL, this);
+	}
+
+	public ItemStack getBlock() {
+		return new ItemStack(SGBlocks.block, 1, ordinal());
+	}
+
+	public IBlockState getBlockState() {
+		return SGBlocks.block.getDefaultState().withProperty(SGProperties.MATERIAL, this);
 	}
 
 	public static void init() {
 		for (EnumMaterial mat : values()) {
 			ShiftingGears.proxy.registerItemModel(SGItems.ingot, mat.ordinal(), "ingot", "material=" + mat.getName());
 			ShiftingGears.proxy.registerItemModel(SGItems.nugget, mat.ordinal(), "nugget", "material=" + mat.getName());
+			ShiftingGears.proxy.registerItemModel(Item.getItemFromBlock(SGBlocks.block), mat.ordinal(), "block", "material=" + mat.getName());
 
 			OreDictionary.registerOre("ingot" + mat.getOreSuffix(), mat.getIngot());
 			OreDictionary.registerOre("nugget" + mat.getOreSuffix(), mat.getNugget());
+			OreDictionary.registerOre("block" + mat.getOreSuffix(), mat.getBlock());
 
 			GameRegistry.addShapelessRecipe(new ItemStack(SGItems.nugget, 9, mat.ordinal()), mat.getIngot());
 			GameRegistry.addShapedRecipe(mat.getIngot(), "NNN", "NNN", "NNN", 'N', mat.getNugget());
+
+			GameRegistry.addShapelessRecipe(new ItemStack(SGItems.ingot, 0, mat.ordinal()), mat.getBlock());
+			GameRegistry.addShapedRecipe(mat.getBlock(), "III", "III", "III", 'I', mat.getIngot());
 
 			if (mat.hasOre) {
 				ShiftingGears.proxy.registerItemModel(Item.getItemFromBlock(SGBlocks.ore), mat.ordinal(), "ore", "material=" + mat.getName());

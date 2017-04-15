@@ -7,12 +7,17 @@
 		"material": {
 			"copper": {
 				"textures": {
-					"all": "shiftinggears:blocks/ore/copper"
+					"all": "shiftinggears:blocks/block/copper"
 				}
 			},
 			"zinc": {
 				"textures": {
-					"all": "shiftinggears:blocks/ore/zinc"
+					"all": "shiftinggears:blocks/block/zinc"
+				}
+			},
+			"brass": {
+				"textures": {
+					"all": "shiftinggears:blocks/block/brass"
 				}
 			}
 		}

@@ -2,7 +2,9 @@ package shiftinggears.block;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import shiftinggears.block.material.BlockBlock;
 import shiftinggears.block.material.BlockOre;
+import shiftinggears.block.material.ItemBlockBlock;
 import shiftinggears.block.material.ItemBlockOre;
 import shiftinggears.util.ItemBlock;
 
@@ -15,6 +17,8 @@ public class SGBlocks {
 
 	@ItemBlock(ItemBlockOre.class)
 	public static BlockOre ore = new BlockOre();
+	@ItemBlock(ItemBlockBlock.class)
+	public static BlockBlock block = new BlockBlock();
 
 	public static void init() {
 		for (Field f : SGBlocks.class.getFields()) {
