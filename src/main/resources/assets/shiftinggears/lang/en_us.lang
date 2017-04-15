@@ -1,0 +1,9 @@
+tile.shiftinggears.ore.copper.name=Copper Ore
+tile.shiftinggears.ore.zinc.name=Zinc Ore
+
+item.shiftinggears.ingot.copper.name=Copper Ingot
+item.shiftinggears.ingot.zinc.name=Zinc Ingot
+item.shiftinggears.ingot.brass.name=Brass Ingot
+item.shiftinggears.nugget.copper.name=Copper Nugget
+item.shiftinggears.nugget.zinc.name=Zinc Nugget
+item.shiftinggears.nugget.brass.name=Brass Nugget

@@ -1,0 +1,20 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"module": "cube_all"
+	},
+	"variants": {
+		"material": {
+			"copper": {
+				"textures": {
+					"all": "shiftinggears:blocks/ore/copper"
+				}
+			},
+			"zinc": {
+				"textures": {
+					"all": "shiftinggears:blocks/ore/zinc"
+				}
+			}
+		}
+	}
+}

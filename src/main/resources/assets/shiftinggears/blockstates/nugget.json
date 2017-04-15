@@ -1,0 +1,25 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "shiftinggears:item/base"
+	},
+	"variants": {
+		"material": {
+			"copper": {
+				"textures": {
+					"layer0": "shiftinggears:items/nugget/copper"
+				}
+			},
+			"zinc": {
+				"textures": {
+					"layer0": "shiftinggears:items/nugget/zinc"
+				}
+			},
+			"brass": {
+				"textures": {
+					"layer0": "shiftinggears:items/nugget/brass"
+				}
+			}
+		}
+	}
+}

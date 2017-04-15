@@ -5,6 +5,9 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import shiftinggears.block.SGBlocks;
+import shiftinggears.item.SGItems;
+import shiftinggears.material.EnumMaterial;
 import shiftinggears.proxy.AbstractProxy;
 
 /**
@@ -22,7 +25,9 @@ public class ShiftingGears {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-
+		SGItems.init();
+		SGBlocks.init();
+		EnumMaterial.init();
 	}
 
 	@Mod.EventHandler
