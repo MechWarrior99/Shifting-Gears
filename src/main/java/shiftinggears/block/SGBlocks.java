@@ -1,14 +1,17 @@
 package shiftinggears.block;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import shiftinggears.block.material.BlockBlock;
+import shiftinggears.block.material.BlockCarpenter;
 import shiftinggears.block.material.BlockOre;
 import shiftinggears.block.material.ItemBlockBlock;
+import shiftinggears.block.material.ItemBlockCarpenter;
 import shiftinggears.block.material.ItemBlockOre;
 import shiftinggears.util.ItemBlock;
-
-import java.lang.reflect.Field;
 
 /**
  * @author shadowfacts
@@ -19,6 +22,8 @@ public class SGBlocks {
 	public static BlockOre ore = new BlockOre();
 	@ItemBlock(ItemBlockBlock.class)
 	public static BlockBlock block = new BlockBlock();
+	@ItemBlock(ItemBlockCarpenter.class)
+	public static BlockCarpenter carpenter = new BlockCarpenter();
 
 	public static void init() {
 		for (Field f : SGBlocks.class.getFields()) {

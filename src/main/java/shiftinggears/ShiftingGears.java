@@ -1,5 +1,6 @@
 package shiftinggears;
 
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -7,9 +8,12 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import shiftinggears.block.SGBlocks;
+import shiftinggears.crafting.RecipesHandler;
 import shiftinggears.item.SGItems;
 import shiftinggears.material.EnumMaterial;
 import shiftinggears.proxy.AbstractProxy;
+import shiftinggears.tileentity.SpecialRenderCarpenter;
+import shiftinggears.tileentity.TileEntityCarpenter;
 import shiftinggears.world.ore.OreGenerator;
 
 import java.io.File;
@@ -35,6 +39,11 @@ public class ShiftingGears {
 		SGItems.init();
 		SGBlocks.init();
 		EnumMaterial.init();
+		RecipesHandler.init();
+		SoundManager.init();
+		
+		GameRegistry.registerTileEntity(TileEntityCarpenter.class, "carpenter");
+		
 
 		OreGenerator.init(new File(configDir, "ore-generation.json"));
 		GameRegistry.registerWorldGenerator(OreGenerator.instance, 1);
@@ -42,7 +51,7 @@ public class ShiftingGears {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCarpenter.class, new SpecialRenderCarpenter());
 	}
 
 	@Mod.EventHandler
