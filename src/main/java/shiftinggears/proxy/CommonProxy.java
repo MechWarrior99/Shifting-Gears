@@ -2,6 +2,7 @@ package shiftinggears.proxy;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 
 /**
  * @author shadowfacts
@@ -16,6 +17,11 @@ public class CommonProxy extends AbstractProxy {
 	@SuppressWarnings("deprecated")
 	public String localize(String key, Object... params) {
 		return I18n.translateToLocalFormatted(key, params);
+	}
+
+	@Override
+	public World getClientWorld() {
+		return null;
 	}
 
 	@Override

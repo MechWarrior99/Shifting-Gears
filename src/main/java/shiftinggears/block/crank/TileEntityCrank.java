@@ -3,7 +3,9 @@ package shiftinggears.block.crank;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import shiftinggears.ShiftingGears;
 import shiftinggears.api.mechanical.IMechanicalPowerObject;
+import shiftinggears.network.PacketRequestUpdateCrank;
 import shiftinggears.tileentity.TEBase;
 
 /**
@@ -27,12 +29,20 @@ public class TileEntityCrank extends TEBase implements IMechanicalPowerObject, I
 		if (speed < 0) speed = 0;
 
 		if (speed > 0) transferPower();
+		world.getChunkFromBlockCoords(pos).setChunkModified();
 	}
 
 	private void transferPower() {
 		TileEntity te = world.getTileEntity(pos.down());
 		if (te instanceof IMechanicalPowerObject) {
 			((IMechanicalPowerObject)te).apply(this);
+		}
+	}
+
+	@Override
+	public void onLoad() {
+		if (world.isRemote) {
+			ShiftingGears.network.sendToServer(new PacketRequestUpdateCrank(this));
 		}
 	}
 

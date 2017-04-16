@@ -1,9 +1,11 @@
 package shiftinggears.proxy;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import shiftinggears.ShiftingGears;
@@ -25,6 +27,11 @@ public class ClientProxy extends AbstractProxy {
 	@Override
 	public String localize(String key, Object... params) {
 		return I18n.format(key, params);
+	}
+
+	@Override
+	public World getClientWorld() {
+		return Minecraft.getMinecraft().world;
 	}
 
 	@Override
