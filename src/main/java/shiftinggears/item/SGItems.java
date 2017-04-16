@@ -14,6 +14,7 @@ public class SGItems {
 
 	public static ItemIngot ingot = new ItemIngot();
 	public static ItemNugget nugget = new ItemNugget();
+	public static ItemBlueprint blueprint = new ItemBlueprint();
 
 	public static void init() {
 		for (Field f : SGItems.class.getFields()) {

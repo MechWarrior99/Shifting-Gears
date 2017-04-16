@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import shiftinggears.api.ShiftingGearsAPI;
 import shiftinggears.block.SGBlocks;
+import shiftinggears.blueprints.BlueprintManager;
 import shiftinggears.crafting.CarpentersRecipe;
 import shiftinggears.internal.InternalMethods;
 import shiftinggears.item.SGItems;
@@ -53,7 +54,7 @@ public class ShiftingGears {
 
 		// temp
 		ShiftingGearsAPI.getRecipeRegistry().addCarpenterRecipe(new CarpentersRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD)));
-
+		BlueprintManager.init(new File(configDir, "multiblock.json"));
 		OreGenerator.init(new File(configDir, "ore-generation.json"));
 		GameRegistry.registerWorldGenerator(OreGenerator.instance, 1);
 
