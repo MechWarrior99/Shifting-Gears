@@ -3,7 +3,6 @@ package shiftinggears.block.carpenter;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -56,7 +55,7 @@ public class BlockCarpenter extends Block {
         			in.add(stack);
         		}
         	}
-        	ICarpentersRecipe r = RecipesHandler.matchCarpentersRecipe(in);
+        	ICarpentersRecipe r = RecipesHandler.INSTANCE.matchCarpentersRecipe(in);
 			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundManager.TABLE_HIT, SoundCategory.BLOCKS, 0.75F, 1F);
         	if(r != null){
         		tc.hit++;
