@@ -24,6 +24,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemHandlerHelper;
 import shiftinggears.ShiftingGears;
 import shiftinggears.SoundManager;
 import shiftinggears.api.crafting.ICarpentersRecipe;
@@ -66,8 +67,28 @@ public class BlockCarpenter extends BlockTE<TileEntityCarpenter> {
         TileEntityCarpenter tc = getTileEntity(world, pos);
         if(!player.isSneaking()){
         	ItemStack heldItem = player.getHeldItem(hand);
-        	if (facing == EnumFacing.UP && !heldItem.isEmpty()) {
-            	tc.setItemHeld(heldItem.copy(), hitX, hitZ);
+        	if (facing == EnumFacing.UP) {
+        		if (!heldItem.isEmpty()) {
+					tc.setItemHeld(ItemHandlerHelper.copyStackWithSize(heldItem, 1), hitX, hitZ);
+					if (!player.capabilities.isCreativeMode) {
+						heldItem.shrink(1);
+					}
+				} else {
+        			tc.x.clear();
+        			tc.z.clear();
+        			for (int i = tc.itemHeld.size() - 1; i >= 0; i--) {
+						ItemStack stack = tc.itemHeld.get(i);
+						if (!stack.isEmpty()) {
+							tc.itemHeld.set(i, ItemStack.EMPTY);
+							if (!world.isRemote) {
+								if (!player.inventory.addItemStackToInventory(stack)) {
+									EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), stack);
+									world.spawnEntity(item);
+								}
+							}
+						}
+					}
+				}
             }
         } else {
         	ArrayList<ItemStack> in = new ArrayList<ItemStack>();
