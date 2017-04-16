@@ -17,4 +17,9 @@ public class CommonProxy extends AbstractProxy {
 	public String localize(String key, Object... params) {
 		return I18n.translateToLocalFormatted(key, params);
 	}
+
+	@Override
+	public void registerRenderers() {
+	}
+
 }

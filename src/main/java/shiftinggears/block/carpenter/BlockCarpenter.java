@@ -1,7 +1,6 @@
-package shiftinggears.block.material;
+package shiftinggears.block.carpenter;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -25,12 +24,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import shiftinggears.ShiftingGears;
 import shiftinggears.SoundManager;
-import shiftinggears.crafting.CarpentersRecipe;
+import shiftinggears.api.crafting.ICarpentersRecipe;
 import shiftinggears.crafting.RecipesHandler;
 import shiftinggears.tileentity.TileEntityCarpenter;
 
-public class BlockCarpenter extends Block implements ITileEntityProvider{
-	int hitsTilDone = 3;
+import javax.annotation.Nullable;
+
+public class BlockCarpenter extends Block {
+
+	private static final int HITS_UNTIL_DONE = 3;
+
 	public BlockCarpenter(){
 		super(Material.WOOD);
 		setRegistryName("carpenter");
@@ -39,12 +42,13 @@ public class BlockCarpenter extends Block implements ITileEntityProvider{
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
         TileEntityCarpenter tc = (TileEntityCarpenter)world.getTileEntity(pos);
-        if(!playerIn.isSneaking()){
-        	 if(facing ==  EnumFacing.UP){
-             	tc.setItemHeld(playerIn.getHeldItem(hand).copy(), hitX, hitZ);
-             }
+        if(!player.isSneaking()){
+        	ItemStack heldItem = player.getHeldItem(hand);
+        	if (facing == EnumFacing.UP && !heldItem.isEmpty()) {
+            	tc.setItemHeld(heldItem.copy(), hitX, hitZ);
+            }
         } else {
         	ArrayList<ItemStack> in = new ArrayList<ItemStack>();
         	for(ItemStack stack: tc.itemHeld){
@@ -52,19 +56,19 @@ public class BlockCarpenter extends Block implements ITileEntityProvider{
         			in.add(stack);
         		}
         	}
-        	CarpentersRecipe r = RecipesHandler.matchCarpentersRecipe(in);
+        	ICarpentersRecipe r = RecipesHandler.matchCarpentersRecipe(in);
 			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundManager.TABLE_HIT, SoundCategory.BLOCKS, 0.75F, 1F);
         	if(r != null){
         		tc.hit++;
-        		if(tc.hit >= this.hitsTilDone){
+        		if(tc.hit >= HITS_UNTIL_DONE){
         			if(!world.isRemote){
-                		world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY()+1, pos.getZ(), r.output));
+                		world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY()+1, pos.getZ(), r.getOutput(in)));
                 	}
             		tc.itemHeld.clear();
             		tc.hit = 0;
         		}
         	} else {
-        		playerIn.sendStatusMessage(new TextComponentString(TextFormatting.RED+"There's nothing to be made with what's here"), true);
+        		player.sendStatusMessage(new TextComponentString(TextFormatting.RED+"There's nothing to be made with what's here"), true);
         	}
         	
         }
@@ -72,21 +76,30 @@ public class BlockCarpenter extends Block implements ITileEntityProvider{
     }
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
+	}
+
+	@Nullable
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileEntityCarpenter();
 	}
-	
+
 	@Override
+	@Deprecated
 	public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
 	@Override
+	@Deprecated
     public boolean isFullCube(IBlockState state){
         return false;
     }
 	
 	@Override
+	@Deprecated
 	public EnumBlockRenderType getRenderType(IBlockState state){
         return EnumBlockRenderType.MODEL;
     }
@@ -96,4 +109,5 @@ public class BlockCarpenter extends Block implements ITileEntityProvider{
     public BlockRenderLayer getBlockLayer(){
         return BlockRenderLayer.CUTOUT;
     }
+
 }

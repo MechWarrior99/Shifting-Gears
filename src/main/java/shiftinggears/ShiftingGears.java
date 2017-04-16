@@ -51,7 +51,7 @@ public class ShiftingGears {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCarpenter.class, new SpecialRenderCarpenter());
+		proxy.registerRenderers();
 	}
 
 	@Mod.EventHandler

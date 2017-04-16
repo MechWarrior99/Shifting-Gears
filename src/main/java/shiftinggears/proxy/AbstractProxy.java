@@ -13,4 +13,6 @@ public abstract class AbstractProxy {
 
 	public abstract String localize(String key, Object... params);
 
+	public abstract void registerRenderers();
+
 }

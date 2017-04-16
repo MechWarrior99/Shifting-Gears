@@ -3,13 +3,11 @@ package shiftinggears.block;
 import java.lang.reflect.Field;
 
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import shiftinggears.block.material.BlockBlock;
-import shiftinggears.block.material.BlockCarpenter;
+import shiftinggears.block.carpenter.BlockCarpenter;
 import shiftinggears.block.material.BlockOre;
 import shiftinggears.block.material.ItemBlockBlock;
-import shiftinggears.block.material.ItemBlockCarpenter;
 import shiftinggears.block.material.ItemBlockOre;
 import shiftinggears.util.ItemBlock;
 
@@ -22,7 +20,6 @@ public class SGBlocks {
 	public static BlockOre ore = new BlockOre();
 	@ItemBlock(ItemBlockBlock.class)
 	public static BlockBlock block = new BlockBlock();
-	@ItemBlock(ItemBlockCarpenter.class)
 	public static BlockCarpenter carpenter = new BlockCarpenter();
 
 	public static void init() {
@@ -52,7 +49,9 @@ public class SGBlocks {
 				throw new RuntimeException(e);
 			}
 		} else {
-			return new net.minecraft.item.ItemBlock(block);
+			net.minecraft.item.ItemBlock itemBlock = new net.minecraft.item.ItemBlock(block);
+			itemBlock.setRegistryName(block.getRegistryName());
+			return itemBlock;
 		}
 	}
 

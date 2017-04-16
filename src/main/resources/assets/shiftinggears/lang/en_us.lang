@@ -3,6 +3,7 @@ tile.shiftinggears.ore.zinc.name=Zinc Ore
 tile.shiftinggears.block.copper.name=Copper Block
 tile.shiftinggears.block.zinc.name=Zinc Block
 tile.shiftinggears.block.brass.name=Brass Block
+tile.shiftinggears.carpenter.name=Carpenter
 
 item.shiftinggears.ingot.copper.name=Copper Ingot
 item.shiftinggears.ingot.zinc.name=Zinc Ingot
