@@ -3,11 +3,9 @@ package shiftinggears.crafting;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import shiftinggears.api.crafting.ICarpentersRecipe;
 import shiftinggears.api.crafting.ISGRecipeRegistry;
-import shiftinggears.util.Util;
 
 public class RecipesHandler implements ISGRecipeRegistry {
 

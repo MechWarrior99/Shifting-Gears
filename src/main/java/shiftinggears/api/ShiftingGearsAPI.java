@@ -1,5 +1,6 @@
 package shiftinggears.api;
 
+import shiftinggears.api.blueprint.IBlueprintManager;
 import shiftinggears.api.crafting.ISGRecipeRegistry;
 import shiftinggears.api.internal.IInternalMethods;
 
@@ -19,6 +20,11 @@ public class ShiftingGearsAPI {
 	public static ISGRecipeRegistry getRecipeRegistry() {
 		checkInitialized();
 		return internal.getRecipeRegistry();
+	}
+
+	public static IBlueprintManager getBlueprintManager() {
+		checkInitialized();
+		return internal.getBlueprintManager();
 	}
 
 	private static void checkInitialized() {

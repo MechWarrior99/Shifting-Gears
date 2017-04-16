@@ -1,0 +1,40 @@
+{
+	"multiblock": [
+		[
+			[
+				{
+					"block": "shiftinggears:block",
+					"properties": {
+						"material": "copper"
+					}
+				},
+				{
+					"block": "shiftinggears:block",
+					"properties": {
+						"material": "zinc"
+					}
+				},
+				{
+					"block": "shiftinggears:block",
+					"properties": {
+						"material": "brass"
+					}
+				}
+			]
+		]
+	],
+	"requirements": [
+		{
+			"item": "shiftinggears:block",
+			"meta": 0
+		},
+		{
+			"item": "shiftinggears:block",
+			"meta": 1
+		},
+		{
+			"item": "shiftinggears:block",
+			"meta": 2
+		}
+	]
+}
