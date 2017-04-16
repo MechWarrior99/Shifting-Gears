@@ -29,12 +29,18 @@ public class ItemBlueprint extends Item implements ItemModelProvider {
 		setHasSubtypes(true);
 	}
 
+	public static Blueprint getBlueprint(ItemStack stack) {
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("blueprint", Constants.NBT.TAG_STRING)) {
+			return ShiftingGearsAPI.getBlueprintManager().get(stack.getTagCompound().getString("blueprint"));
+		}
+		return null;
+	}
+
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
-		if (heldItem.hasTagCompound() && heldItem.getTagCompound().hasKey("blueprint", Constants.NBT.TAG_STRING)) {
-			String id = heldItem.getTagCompound().getString("blueprint");
-			Blueprint blueprint = ShiftingGearsAPI.getBlueprintManager().get(id);
+		Blueprint blueprint = getBlueprint(heldItem);
+		if (blueprint != null) {
 			BlockPos placePos = pos.offset(facing);
 			if (blueprint.canPlace(world, placePos, player.getHorizontalFacing()) && blueprint.meetsRequirements(player)) {
 				blueprint.place(world, placePos, player.getHorizontalFacing());
@@ -57,10 +63,10 @@ public class ItemBlueprint extends Item implements ItemModelProvider {
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
-		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("blueprint", Constants.NBT.TAG_STRING)) {
+		Blueprint blueprint = getBlueprint(stack);
+		if (blueprint != null) {
 			String id = stack.getTagCompound().getString("blueprint");
 			tooltip.add("Blueprint: " + ShiftingGears.proxy.localize("shiftinggears.blueprint." + id));
-			Blueprint blueprint = ShiftingGearsAPI.getBlueprintManager().get(id);
 			blueprint.getRequirements().forEach(req -> {
 				String name = ShiftingGears.proxy.localize(req.getUnlocalizedName() + ".name");
 				tooltip.add("Requires: " + req.getCount() + "x " + name);

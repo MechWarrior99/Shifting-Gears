@@ -53,6 +53,8 @@ public class Blueprint {
 	}
 
 	public boolean meetsRequirements(EntityPlayer player) {
+		if (player.capabilities.isCreativeMode) return true;
+
 		InventoryPlayer inv = player.inventory;
 		for (ItemStack req : requirements) {
 			int amount = 0;
@@ -68,6 +70,8 @@ public class Blueprint {
 	}
 
 	public void removeItems(EntityPlayer player) {
+		if (player.capabilities.isCreativeMode) return;
+
 		InventoryPlayer inv = player.inventory;
 		for (ItemStack req : requirements) {
 			int removed = 0;
@@ -82,6 +86,10 @@ public class Blueprint {
 				}
 			}
 		}
+	}
+
+	public IBlockState[][][] getMultiblock() {
+		return multiblock;
 	}
 
 	public NonNullList<ItemStack> getRequirements() {

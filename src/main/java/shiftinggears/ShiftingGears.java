@@ -62,6 +62,8 @@ public class ShiftingGears {
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(ID);
 		network.registerMessage(new PacketUpdateCrank.Handler(), PacketUpdateCrank.class, 0, Side.CLIENT);
 		network.registerMessage(new PacketRequestUpdateCrank.Handler(), PacketRequestUpdateCrank.class, 1, Side.SERVER);
+
+		proxy.preInitClient();
 	}
 
 	@Mod.EventHandler

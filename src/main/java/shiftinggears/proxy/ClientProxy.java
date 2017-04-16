@@ -7,12 +7,14 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import shiftinggears.ShiftingGears;
 import shiftinggears.block.crank.RendererCrank;
 import shiftinggears.block.crank.TileEntityCrank;
 import shiftinggears.block.carpenter.RendererCarpenter;
 import shiftinggears.block.carpenter.TileEntityCarpenter;
+import shiftinggears.event.BlueprintPreviewHandler;
 
 /**
  * @author shadowfacts
@@ -40,4 +42,8 @@ public class ClientProxy extends AbstractProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrank.class, new RendererCrank());
 	}
 
+	@Override
+	public void preInitClient() {
+		MinecraftForge.EVENT_BUS.register(new BlueprintPreviewHandler());
+	}
 }

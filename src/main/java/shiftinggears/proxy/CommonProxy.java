@@ -28,4 +28,8 @@ public class CommonProxy extends AbstractProxy {
 	public void registerRenderers() {
 	}
 
+	@Override
+	public void preInitClient() {
+
+	}
 }

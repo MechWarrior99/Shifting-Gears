@@ -18,4 +18,5 @@ public abstract class AbstractProxy {
 
 	public abstract void registerRenderers();
 
+	public abstract void preInitClient();
 }
