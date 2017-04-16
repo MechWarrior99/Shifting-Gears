@@ -11,6 +11,7 @@ import shiftinggears.block.carpenter.BlockCarpenter;
 import shiftinggears.block.material.BlockOre;
 import shiftinggears.block.material.ItemBlockBlock;
 import shiftinggears.block.material.ItemBlockOre;
+import shiftinggears.item.ItemModelProvider;
 import shiftinggears.util.ItemBlock;
 
 /**
@@ -42,6 +43,7 @@ public class SGBlocks {
 		GameRegistry.register(block);
 		GameRegistry.register(itemBlock);
 
+		if (block instanceof ItemModelProvider) ((ItemModelProvider)block).registerItemModel();
 		if (block instanceof BlockTE) {
 			GameRegistry.registerTileEntity(((BlockTE)block).getTEClass(), block.getRegistryName().toString());
 		}

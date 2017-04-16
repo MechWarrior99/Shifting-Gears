@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -15,18 +16,24 @@ import net.minecraft.world.World;
 import shiftinggears.ShiftingGears;
 import shiftinggears.api.mechanical.IMechanicalPowerObject;
 import shiftinggears.block.base.BlockTE;
+import shiftinggears.item.ItemModelProvider;
 
 import javax.annotation.Nullable;
 
 /**
  * @author shadowfacts
  */
-public class BlockCrank extends BlockTE<TileEntityCrank> {
+public class BlockCrank extends BlockTE<TileEntityCrank> implements ItemModelProvider {
 
 	public BlockCrank() {
 		super(Material.WOOD);
 		setRegistryName("crank");
 		setUnlocalizedName(ShiftingGears.ID + ".crank");
+	}
+
+	@Override
+	public void registerItemModel() {
+		ShiftingGears.proxy.registerItemModel(Item.getItemFromBlock(this), 0, "crank");
 	}
 
 	@Override
