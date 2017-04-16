@@ -12,7 +12,6 @@ import shiftinggears.block.material.BlockOre;
 import shiftinggears.block.material.ItemBlockBlock;
 import shiftinggears.block.material.ItemBlockOre;
 import shiftinggears.item.ItemModelProvider;
-import shiftinggears.util.ItemBlock;
 
 /**
  * @author shadowfacts
