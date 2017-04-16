@@ -7,6 +7,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import shiftinggears.ShiftingGears;
+import shiftinggears.block.crank.RendererCrank;
+import shiftinggears.block.crank.TileEntityCrank;
 import shiftinggears.tileentity.SpecialRenderCarpenter;
 import shiftinggears.tileentity.TileEntityCarpenter;
 
@@ -28,6 +30,7 @@ public class ClientProxy extends AbstractProxy {
 	@Override
 	public void registerRenderers() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCarpenter.class, new SpecialRenderCarpenter());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrank.class, new RendererCrank());
 	}
 
 }

@@ -24,12 +24,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import shiftinggears.ShiftingGears;
 import shiftinggears.SoundManager;
 import shiftinggears.api.crafting.ICarpentersRecipe;
+import shiftinggears.block.base.BlockTE;
 import shiftinggears.crafting.RecipesHandler;
 import shiftinggears.tileentity.TileEntityCarpenter;
 
 import javax.annotation.Nullable;
 
-public class BlockCarpenter extends Block {
+public class BlockCarpenter extends BlockTE<TileEntityCarpenter> {
 
 	private static final int HITS_UNTIL_DONE = 3;
 
@@ -42,7 +43,7 @@ public class BlockCarpenter extends Block {
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
-        TileEntityCarpenter tc = (TileEntityCarpenter)world.getTileEntity(pos);
+        TileEntityCarpenter tc = getTileEntity(world, pos);
         if(!player.isSneaking()){
         	ItemStack heldItem = player.getHeldItem(hand);
         	if (facing == EnumFacing.UP && !heldItem.isEmpty()) {
@@ -81,8 +82,13 @@ public class BlockCarpenter extends Block {
 
 	@Nullable
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
+	public TileEntityCarpenter createTileEntity(World world, IBlockState state) {
 		return new TileEntityCarpenter();
+	}
+
+	@Override
+	public Class<TileEntityCarpenter> getTEClass() {
+		return TileEntityCarpenter.class;
 	}
 
 	@Override

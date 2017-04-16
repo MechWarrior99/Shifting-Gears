@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import shiftinggears.block.base.BlockTE;
+import shiftinggears.block.crank.BlockCrank;
 import shiftinggears.block.material.BlockBlock;
 import shiftinggears.block.carpenter.BlockCarpenter;
 import shiftinggears.block.material.BlockOre;
@@ -21,6 +23,7 @@ public class SGBlocks {
 	@ItemBlock(ItemBlockBlock.class)
 	public static BlockBlock block = new BlockBlock();
 	public static BlockCarpenter carpenter = new BlockCarpenter();
+	public static BlockCrank crank = new BlockCrank();
 
 	public static void init() {
 		for (Field f : SGBlocks.class.getFields()) {
@@ -38,6 +41,10 @@ public class SGBlocks {
 	private static void register(Block block, net.minecraft.item.ItemBlock itemBlock) {
 		GameRegistry.register(block);
 		GameRegistry.register(itemBlock);
+
+		if (block instanceof BlockTE) {
+			GameRegistry.registerTileEntity(((BlockTE)block).getTEClass(), block.getRegistryName().toString());
+		}
 	}
 
 	private static net.minecraft.item.ItemBlock createItemBlock(Block block, Field f) {

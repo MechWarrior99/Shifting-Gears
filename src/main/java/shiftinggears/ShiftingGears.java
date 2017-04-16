@@ -45,8 +45,6 @@ public class ShiftingGears {
 		EnumMaterial.init();
 		SoundManager.init();
 
-		GameRegistry.registerTileEntity(TileEntityCarpenter.class, "carpenter");
-
 		// temp
 		ShiftingGearsAPI.getRecipeRegistry().addCarpenterRecipe(new CarpentersRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD)));
 
