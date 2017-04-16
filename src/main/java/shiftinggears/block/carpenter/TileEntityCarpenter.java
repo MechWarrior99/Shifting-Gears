@@ -1,4 +1,4 @@
-package shiftinggears.tileentity;
+package shiftinggears.block.carpenter;
 
 import java.util.ArrayList;
 
@@ -8,8 +8,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.Constants;
+import shiftinggears.tileentity.TEBase;
 
-public class TileEntityCarpenter extends TEBase{
+public class TileEntityCarpenter extends TEBase {
 	public NonNullList<ItemStack> itemHeld = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 	
 	public ArrayList<Double> x = new ArrayList<Double>();

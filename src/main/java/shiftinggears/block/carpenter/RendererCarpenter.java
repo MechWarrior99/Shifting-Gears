@@ -1,4 +1,4 @@
-package shiftinggears.tileentity;
+package shiftinggears.block.carpenter;
 
 import org.lwjgl.opengl.GL11;
 
@@ -7,9 +7,8 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 
-public class SpecialRenderCarpenter extends TileEntitySpecialRenderer<TileEntityCarpenter> {
+public class RendererCarpenter extends TileEntitySpecialRenderer<TileEntityCarpenter> {
 
 	@Override
 	public void renderTileEntityAt(TileEntityCarpenter te, double x, double y, double z, float partialTicks, int destroyStage){

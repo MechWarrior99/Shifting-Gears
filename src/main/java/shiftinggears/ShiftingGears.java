@@ -15,7 +15,6 @@ import shiftinggears.internal.InternalMethods;
 import shiftinggears.item.SGItems;
 import shiftinggears.material.EnumMaterial;
 import shiftinggears.proxy.AbstractProxy;
-import shiftinggears.tileentity.TileEntityCarpenter;
 import shiftinggears.world.ore.OreGenerator;
 
 import java.io.File;
