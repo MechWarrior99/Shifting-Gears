@@ -1,0 +1,6 @@
+{
+    "variants":{
+        "side=left": { "model": "shiftinggears:carpenters_table_left"},
+        "side=right":  { "model": "shiftinggears:carpenters_table_right"}
+    }
+}
