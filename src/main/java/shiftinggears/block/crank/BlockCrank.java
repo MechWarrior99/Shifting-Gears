@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -24,6 +25,8 @@ import javax.annotation.Nullable;
  * @author shadowfacts
  */
 public class BlockCrank extends BlockTE<TileEntityCrank> implements ItemModelProvider {
+
+	private static final AxisAlignedBB BOX = new AxisAlignedBB(3/16d, 0, 3/16d, 13/16d, 13/16d, 13/16d);
 
 	public BlockCrank() {
 		super(Material.WOOD);
@@ -57,6 +60,12 @@ public class BlockCrank extends BlockTE<TileEntityCrank> implements ItemModelPro
 			getDrops(world, pos, state, 0).forEach(stack -> world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack)));
 			world.setBlockToAir(pos);
 		}
+	}
+
+	@Override
+	@Deprecated
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return BOX;
 	}
 
 	@Override
