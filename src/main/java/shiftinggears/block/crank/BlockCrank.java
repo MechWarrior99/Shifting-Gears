@@ -14,6 +14,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import shiftinggears.ShiftingGears;
 import shiftinggears.api.mechanical.IMechanicalPowerObject;
 import shiftinggears.block.base.BlockTE;
@@ -41,8 +42,12 @@ public class BlockCrank extends BlockTE<TileEntityCrank> implements ItemModelPro
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		getTileEntity(world, pos).tryCrank();
-		return true;
+		if (!(player instanceof FakePlayer)) {
+			getTileEntity(world, pos).tryCrank();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
