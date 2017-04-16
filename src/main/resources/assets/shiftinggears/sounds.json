@@ -1,26 +1,11 @@
 {
-    "table1": {
-    "category": "block",
-    "sounds": [
-      "shiftinggears:table_hit1"
-    ],
-    "subtitle": "Table Hit"
-    },
-
-    "table2": {
-    "category": "block",
-    "sounds": [
-      "shiftinggears:table_hit2"
-    ],
-    "subtitle": "Table Hit"
-    },
-
-    "table3": {
-    "category": "block",
-    "sounds": [
-      "shiftinggears:table_hit3"
-    ],
-    "subtitle": "Table Hit"
-    }
-
+	"table": {
+		"category": "block",
+		"sounds": [
+			"shiftinggears:table_hit1",
+			"shiftinggears:table_hit2",
+			"shiftinggears:table_hit3"
+		],
+		"subtitle": "Table Hit"
+	}
 }

@@ -30,7 +30,6 @@ import shiftinggears.crafting.RecipesHandler;
 import shiftinggears.tileentity.TileEntityCarpenter;
 
 public class BlockCarpenter extends Block implements ITileEntityProvider{
-	Random rand = new Random();
 	int hitsTilDone = 3;
 	public BlockCarpenter(){
 		super(Material.WOOD);
@@ -54,16 +53,7 @@ public class BlockCarpenter extends Block implements ITileEntityProvider{
         		}
         	}
         	CarpentersRecipe r = RecipesHandler.matchCarpentersRecipe(in);
-        	int sound = rand.nextInt(3);
-        	if(sound == 0){
-        		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundManager.TABLE_HIT1, SoundCategory.BLOCKS, 0.75F, 1F);
-        	}
-        	if(sound == 1){
-        		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundManager.TABLE_HIT2, SoundCategory.BLOCKS, 0.75F, 1F);
-        	}
-        	if(sound == 2){
-        		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundManager.TABLE_HIT3, SoundCategory.BLOCKS, 0.75F, 1F);
-			}
+			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundManager.TABLE_HIT, SoundCategory.BLOCKS, 0.75F, 1F);
         	if(r != null){
         		tc.hit++;
         		if(tc.hit >= this.hitsTilDone){
