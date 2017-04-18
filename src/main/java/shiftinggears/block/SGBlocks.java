@@ -3,6 +3,8 @@ package shiftinggears.block;
 import java.lang.reflect.Field;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import shiftinggears.block.base.BlockTE;
 import shiftinggears.block.crank.BlockCrank;
@@ -11,6 +13,7 @@ import shiftinggears.block.carpenter.BlockCarpenter;
 import shiftinggears.block.material.BlockOre;
 import shiftinggears.block.material.ItemBlockBlock;
 import shiftinggears.block.material.ItemBlockOre;
+import shiftinggears.fluid.SGFluids;
 import shiftinggears.item.ItemModelProvider;
 
 /**
@@ -24,6 +27,10 @@ public class SGBlocks {
 	public static BlockBlock block = new BlockBlock();
 	public static BlockCarpenter carpenter = new BlockCarpenter();
 	public static BlockCrank crank = new BlockCrank();
+	@ItemBlock.None
+	public static BlockFluidClassic moltenBrass = new BlockFluidClassic(SGFluids.moltenBrass, Material.LAVA) {{
+		setRegistryName("molten_brass");
+	}};
 
 	public static void init() {
 		for (Field f : SGBlocks.class.getFields()) {
@@ -40,7 +47,7 @@ public class SGBlocks {
 
 	private static void register(Block block, net.minecraft.item.ItemBlock itemBlock) {
 		GameRegistry.register(block);
-		GameRegistry.register(itemBlock);
+		if (itemBlock != null) GameRegistry.register(itemBlock);
 
 		if (block instanceof ItemModelProvider) ((ItemModelProvider)block).registerItemModel();
 		if (block instanceof BlockTE) {
@@ -56,6 +63,8 @@ public class SGBlocks {
 			} catch (ReflectiveOperationException e) {
 				throw new RuntimeException(e);
 			}
+		} else if (f.isAnnotationPresent(ItemBlock.None.class)) {
+			return null;
 		} else {
 			net.minecraft.item.ItemBlock itemBlock = new net.minecraft.item.ItemBlock(block);
 			itemBlock.setRegistryName(block.getRegistryName());

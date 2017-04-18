@@ -13,3 +13,5 @@ item.shiftinggears.nugget.copper.name=Copper Nugget
 item.shiftinggears.nugget.zinc.name=Zinc Nugget
 item.shiftinggears.nugget.brass.name=Brass Nugget
 item.shiftinggears.blueprint.name=Blueprint
+
+fluid.molten_brass=Molten Brass

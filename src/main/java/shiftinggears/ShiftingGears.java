@@ -14,6 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import shiftinggears.api.ShiftingGearsAPI;
 import shiftinggears.block.SGBlocks;
 import shiftinggears.crafting.CarpentersRecipe;
+import shiftinggears.fluid.SGFluids;
 import shiftinggears.internal.InternalMethods;
 import shiftinggears.item.SGItems;
 import shiftinggears.material.EnumMaterial;
@@ -46,6 +47,7 @@ public class ShiftingGears {
 		File configDir = new File(event.getModConfigurationDirectory(), ID);
 		if (!configDir.exists()) configDir.mkdirs();
 
+		SGFluids.init();
 		SGItems.init();
 		SGBlocks.init();
 		EnumMaterial.init();

@@ -14,4 +14,10 @@ public @interface ItemBlock {
 
 	Class<? extends net.minecraft.item.ItemBlock> value();
 
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target(ElementType.FIELD)
+	@interface None {
+
+	}
+
 }
