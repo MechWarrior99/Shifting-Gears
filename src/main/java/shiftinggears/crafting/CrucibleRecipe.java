@@ -1,24 +1,28 @@
 package shiftinggears.crafting;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+import shiftinggears.api.crafting.ICrucibleRecipe;
+import shiftinggears.util.Utils;
+
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.item.ItemStack;
-import shiftinggears.api.crafting.ICarpentersRecipe;
-import shiftinggears.util.Utils;
+/**
+ * @author shadowfacts
+ */
+public class CrucibleRecipe implements ICrucibleRecipe {
 
-public class CarpentersRecipe implements ICarpentersRecipe {
-
+	private FluidStack output;
 	private List<ItemStack> inputs;
-	private ItemStack output;
-	
-	public CarpentersRecipe(ItemStack output, ItemStack...input){
-		this.inputs = Arrays.asList(input);
+
+	public CrucibleRecipe(FluidStack output, ItemStack... inputs) {
 		this.output = output;
+		this.inputs = Arrays.asList(inputs);
 	}
 
 	@Override
-	public ItemStack getOutput() {
+	public FluidStack getOutput() {
 		return output.copy();
 	}
 
