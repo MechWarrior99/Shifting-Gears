@@ -2,7 +2,9 @@ package shiftinggears.block.crank;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -17,8 +19,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import shiftinggears.ShiftingGears;
 import shiftinggears.api.mechanical.IMechanicalPowerBlock;
+import shiftinggears.block.SGProperties;
 import shiftinggears.block.base.mechanical.BlockMechanical;
 import shiftinggears.item.ItemModelProvider;
+import shiftinggears.util.Utils;
 
 import javax.annotation.Nullable;
 
@@ -28,11 +32,20 @@ import javax.annotation.Nullable;
 public class BlockCrank extends BlockMechanical<TileEntityCrank> implements ItemModelProvider {
 
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(3/16d, 0, 3/16d, 13/16d, 13/16d, 13/16d);
+	private static final AxisAlignedBB[] BOXES = new AxisAlignedBB[6];
+
+	static {
+		for (EnumFacing facing : EnumFacing.VALUES) {
+			BOXES[facing.ordinal()] = Utils.rotate(BOX, facing);
+		}
+	}
 
 	public BlockCrank() {
 		super(Material.WOOD);
 		setRegistryName("crank");
 		setUnlocalizedName(ShiftingGears.ID + ".crank");
+
+		setDefaultState(blockState.getBaseState().withProperty(SGProperties.ORIENTATION, EnumFacing.DOWN));
 	}
 
 	@Override
@@ -51,26 +64,48 @@ public class BlockCrank extends BlockMechanical<TileEntityCrank> implements Item
 	}
 
 	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return getDefaultState().withProperty(SGProperties.ORIENTATION, facing.getOpposite());
+	}
+
+	@Override
 	public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side) {
-		if (side != EnumFacing.UP) return false;
-		if (!world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP)) return false;
-		TileEntity te = world.getTileEntity(pos.down());
-		return te != null && te instanceof IMechanicalPowerBlock;
+		BlockPos testPos = pos.offset(side.getOpposite());
+		if (!world.getBlockState(testPos).isSideSolid(world, testPos, side)) return false;
+		TileEntity te = world.getTileEntity(testPos);
+//		return te != null && te instanceof IMechanicalPowerBlock;
+		return true;
 	}
 
 	@Override
 	@Deprecated
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		if (!canPlaceBlockOnSide(world, pos, EnumFacing.UP)) {
+		if (!canPlaceBlockOnSide(world, pos, state.getValue(SGProperties.ORIENTATION).getOpposite())) {
 			getDrops(world, pos, state, 0).forEach(stack -> world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack)));
 			world.setBlockToAir(pos);
 		}
 	}
 
 	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, SGProperties.ORIENTATION);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(SGProperties.ORIENTATION).ordinal();
+	}
+
+	@Override
+	@Deprecated
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(SGProperties.ORIENTATION, EnumFacing.VALUES[meta]);
+	}
+
+	@Override
 	@Deprecated
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return BOX;
+		return BOXES[state.getValue(SGProperties.ORIENTATION).ordinal()];
 	}
 
 	@Override
@@ -111,4 +146,5 @@ public class BlockCrank extends BlockMechanical<TileEntityCrank> implements Item
 	public Class<TileEntityCrank> getTEClass() {
 		return TileEntityCrank.class;
 	}
+
 }

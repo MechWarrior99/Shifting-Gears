@@ -4,6 +4,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import shiftinggears.ShiftingGears;
 import shiftinggears.api.mechanical.IMechanicalPowerBlock;
+import shiftinggears.block.SGProperties;
 import shiftinggears.block.base.mechanical.TileEntityMechanical;
 import shiftinggears.network.PacketRequestUpdateCrank;
 
@@ -31,7 +32,7 @@ public class TileEntityCrank extends TileEntityMechanical implements ITickable {
 	}
 
 	private void transferPower() {
-		TileEntity te = world.getTileEntity(pos.down());
+		TileEntity te = world.getTileEntity(pos.offset(world.getBlockState(pos).getValue(SGProperties.ORIENTATION)));
 		if (te instanceof IMechanicalPowerBlock) {
 			((IMechanicalPowerBlock)te).setSpeed(speed);
 		}
