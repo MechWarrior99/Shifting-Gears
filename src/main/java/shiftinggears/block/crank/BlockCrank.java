@@ -16,8 +16,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import shiftinggears.ShiftingGears;
-import shiftinggears.api.mechanical.IMechanicalPowerObject;
-import shiftinggears.block.base.BlockTE;
+import shiftinggears.api.mechanical.IMechanicalPowerBlock;
+import shiftinggears.block.base.mechanical.BlockMechanical;
 import shiftinggears.item.ItemModelProvider;
 
 import javax.annotation.Nullable;
@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 /**
  * @author shadowfacts
  */
-public class BlockCrank extends BlockTE<TileEntityCrank> implements ItemModelProvider {
+public class BlockCrank extends BlockMechanical<TileEntityCrank> implements ItemModelProvider {
 
 	private static final AxisAlignedBB BOX = new AxisAlignedBB(3/16d, 0, 3/16d, 13/16d, 13/16d, 13/16d);
 
@@ -55,7 +55,7 @@ public class BlockCrank extends BlockTE<TileEntityCrank> implements ItemModelPro
 		if (side != EnumFacing.UP) return false;
 		if (!world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP)) return false;
 		TileEntity te = world.getTileEntity(pos.down());
-		return te != null && te instanceof IMechanicalPowerObject;
+		return te != null && te instanceof IMechanicalPowerBlock;
 	}
 
 	@Override

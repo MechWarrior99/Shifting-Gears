@@ -1,11 +1,14 @@
 package shiftinggears.network;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import shiftinggears.ShiftingGears;
 import shiftinggears.block.crank.TileEntityCrank;
 
 /**
@@ -40,13 +43,18 @@ public class PacketRequestUpdateCrank implements IMessage {
 		pos = BlockPos.fromLong(buf.readLong());
 	}
 
-	public static class Handler implements IMessageHandler<PacketRequestUpdateCrank, PacketUpdateCrank> {
+	public static class Handler implements IMessageHandler<PacketRequestUpdateCrank, IMessage> {
 
 		@Override
-		public PacketUpdateCrank onMessage(PacketRequestUpdateCrank message, MessageContext ctx) {
-			TileEntityCrank te = (TileEntityCrank)FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(message.dimension).getTileEntity(message.pos);
-			return new PacketUpdateCrank(te);
+		public IMessage onMessage(PacketRequestUpdateCrank message, MessageContext ctx) {
+			MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+			server.addScheduledTask(() -> {
+				TileEntityCrank te = (TileEntityCrank)server.worldServerForDimension(message.dimension).getTileEntity(message.pos);
+				ShiftingGears.network.sendToAllAround(new PacketUpdateCrank(te), new NetworkRegistry.TargetPoint(message.dimension, message.pos.getX(), message.pos.getY(), message.pos.getZ(), 32));
+			});
+			return null;
 		}
+
 	}
 
 }
