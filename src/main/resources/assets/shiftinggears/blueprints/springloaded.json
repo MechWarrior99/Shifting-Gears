@@ -1,0 +1,19 @@
+{
+  "multiblock": [
+    [
+      [
+        {
+          "block": "shiftinggears:springloaded",
+          "properties": {
+          }
+        }
+      ]
+    ]
+  ],
+  "requirements": [
+    {
+      "item": "shiftinggears:block",
+      "meta": 0
+    }
+  ]
+}
