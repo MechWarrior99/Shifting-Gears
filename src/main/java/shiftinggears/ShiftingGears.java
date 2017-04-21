@@ -57,6 +57,7 @@ public class ShiftingGears {
 		ShiftingGearsAPI.getRecipeRegistry().addCarpenterRecipe(new CarpentersRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD)));
 
 		ShiftingGearsAPI.getBlueprintManager().register("test");
+		ShiftingGearsAPI.getBlueprintManager().register("springloaded");
 
 		OreGenerator.init(new File(configDir, "ore-generation.json"));
 		GameRegistry.registerWorldGenerator(OreGenerator.instance, 1);

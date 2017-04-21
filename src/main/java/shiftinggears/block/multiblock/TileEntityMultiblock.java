@@ -27,6 +27,11 @@ public abstract class TileEntityMultiblock extends TileEntity implements ITickab
     }
 
     protected void updateHasMain() {
+        if(mainPos == null) {
+            mainPos = getPos();
+        }
+        if(mainPos.equals(getPos()))
+            isMain = true;
         if(world.getTileEntity(mainPos) == null) {
             hasMain = false;
             return;
@@ -54,7 +59,10 @@ public abstract class TileEntityMultiblock extends TileEntity implements ITickab
     /**
      * Called to place blocks and create tile entities.
      */
-    public abstract void initMultiblock();
+    public void initMultiblock(boolean isMain, BlockPos mainPos) {
+        setisMain(isMain);
+        setMainPos(mainPos);
+    }
 
     /**
      * Save any multiblock specific info
@@ -90,6 +98,11 @@ public abstract class TileEntityMultiblock extends TileEntity implements ITickab
         return super.writeToNBT(compound);
     }
 
+    @Override
+    public boolean shouldRenderInPass(int pass) {
+        return isMain();
+    }
+
     public boolean isHasMain() {
         return hasMain;
     }
@@ -102,7 +115,7 @@ public abstract class TileEntityMultiblock extends TileEntity implements ITickab
         return isMain;
     }
 
-    public void setMain(boolean main) {
+    public void setisMain(boolean main) {
         isMain = main;
     }
 

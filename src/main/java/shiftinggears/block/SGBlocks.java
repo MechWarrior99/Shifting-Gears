@@ -13,6 +13,7 @@ import shiftinggears.block.carpenter.BlockCarpenter;
 import shiftinggears.block.material.BlockOre;
 import shiftinggears.block.material.ItemBlockBlock;
 import shiftinggears.block.material.ItemBlockOre;
+import shiftinggears.block.springloaded.BlockSpringloaded;
 import shiftinggears.fluid.SGFluids;
 import shiftinggears.item.ItemModelProvider;
 
@@ -27,6 +28,7 @@ public class SGBlocks {
 	public static BlockBlock block = new BlockBlock();
 	public static BlockCarpenter carpenter = new BlockCarpenter();
 	public static BlockCrank crank = new BlockCrank();
+	public static BlockSpringloaded springloaded = new BlockSpringloaded();
 	@ItemBlock.None
 	public static BlockFluidClassic moltenBrass = new BlockFluidClassic(SGFluids.moltenBrass, Material.LAVA) {{
 		setRegistryName("molten_brass");

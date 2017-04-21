@@ -9,6 +9,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import shiftinggears.block.multiblock.TileEntityMultiblock;
 import shiftinggears.util.JsonUtils;
 import shiftinggears.util.Utils;
 
@@ -47,6 +48,9 @@ public class Blueprint {
 				for (int z = 0; z < multiblock[y][x].length; z++) {
 					BlockPos placePos = new BlockPos(x, y, z).rotate(Utils.getRotation(facing)).add(pos);
 					world.setBlockState(placePos, multiblock[y][x][z]);
+					//This part needs more work. Need a way to decide which block is the "main" block
+					if(multiblock[y][x][z].getBlock().hasTileEntity(multiblock[y][x][z]) && world.getTileEntity(placePos) instanceof TileEntityMultiblock)
+						((TileEntityMultiblock) world.getTileEntity(placePos)).initMultiblock(true, placePos);
 				}
 			}
 		}
