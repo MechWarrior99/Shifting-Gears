@@ -4,8 +4,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import shiftinggears.tileentity.TEBase;
 
-public abstract class TileEntityMultiblock extends TileEntity implements ITickable{
+public abstract class TileEntityMultiblock extends TEBase implements ITickable{
     private boolean hasMain, isMain;
     private BlockPos mainPos;
 

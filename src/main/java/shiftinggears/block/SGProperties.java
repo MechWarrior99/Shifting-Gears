@@ -3,8 +3,8 @@ package shiftinggears.block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.client.renderer.EnumFaceDirection;
 import net.minecraft.util.EnumFacing;
+import shiftinggears.material.GearMaterial;
 import shiftinggears.material.EnumMaterial;
 
 /**
@@ -18,5 +18,8 @@ public class SGProperties {
 
 //	Crank
 	public static final IProperty<EnumFacing> ORIENTATION = PropertyDirection.create("orientation");
+
+//  Gear
+    public static final IProperty<GearMaterial> GEAR_MATERIAL = PropertyEnum.create("gear_material", GearMaterial.class);
 
 }

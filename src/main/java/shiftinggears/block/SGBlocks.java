@@ -8,6 +8,7 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import shiftinggears.block.base.BlockTE;
 import shiftinggears.block.crank.BlockCrank;
+import shiftinggears.block.gear.BlockGear;
 import shiftinggears.block.material.BlockBlock;
 import shiftinggears.block.carpenter.BlockCarpenter;
 import shiftinggears.block.material.BlockOre;
@@ -15,6 +16,7 @@ import shiftinggears.block.material.ItemBlockBlock;
 import shiftinggears.block.material.ItemBlockOre;
 import shiftinggears.block.springloaded.BlockSpringloaded;
 import shiftinggears.fluid.SGFluids;
+import shiftinggears.item.ItemGear;
 import shiftinggears.item.ItemModelProvider;
 
 /**
@@ -33,6 +35,8 @@ public class SGBlocks {
 	public static BlockFluidClassic moltenBrass = new BlockFluidClassic(SGFluids.moltenBrass, Material.LAVA) {{
 		setRegistryName("molten_brass");
 	}};
+	@ItemBlock(ItemGear.class)
+	public static BlockGear gear = new BlockGear();
 
 	public static void init() {
 		for (Field f : SGBlocks.class.getFields()) {

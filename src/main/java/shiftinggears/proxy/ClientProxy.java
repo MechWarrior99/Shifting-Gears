@@ -14,6 +14,8 @@ import shiftinggears.block.crank.RendererCrank;
 import shiftinggears.block.crank.TileEntityCrank;
 import shiftinggears.block.carpenter.RendererCarpenter;
 import shiftinggears.block.carpenter.TileEntityCarpenter;
+import shiftinggears.block.gear.GearRender;
+import shiftinggears.block.gear.TileEntityGear;
 import shiftinggears.event.BlueprintPreviewHandler;
 
 /**
@@ -40,6 +42,7 @@ public class ClientProxy extends AbstractProxy {
 	public void registerRenderers() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCarpenter.class, new RendererCarpenter());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrank.class, new RendererCrank());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGear.class, new GearRender());
 	}
 
 	@Override
